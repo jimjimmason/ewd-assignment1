@@ -67,10 +67,10 @@ var members =  [
          },
 
 //todo  add all fields for new member
-         add : function(n,a,p) {
+         add : function(fn,ln) {
           var len = members.length ;
           var newL_len = members.push({
-             name: n, address : a, phone_number: p }) ;
+             FirstName: fn, Surname : ln}) ;
           return newL_len > len ;
          },
          updateOrig : function(key,n,a,p) {

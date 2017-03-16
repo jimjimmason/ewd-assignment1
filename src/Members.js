@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css'
 import buttons from './config/MembersButtons';
 import api from './stubAPI';
+import AddMember from './AddMember';
 //import _ from 'lodash';
 
 
@@ -66,8 +67,8 @@ var MemberRow = React.createClass({
     var leftButtonHandler = this.handleEdit;
     var rightButtonHandler = this.handleDelete;
 
-    console.log("displayMember");
-    console.log(this.props.member.id);
+    //console.log("displayMember");
+    //console.log(this.props.member.id);
     var fields = [
       <td key={'id'}>{this.state.id}</td>,
       <td key={'fname'} >{this.state.fname}</td>,
@@ -132,6 +133,11 @@ var MemberRow = React.createClass({
 
 
 var MembersList = React.createClass({
+  getInitialState: function() {
+    return {
+      addMemberBodyVisible: false
+    }
+  },
   render: function(){
     //console.log('ContactsList');
     //console.log(this.props.contacts);
@@ -139,6 +145,7 @@ var MembersList = React.createClass({
     var memberRows = this.props.members.map(member => {
         return <MemberRow key={member.id} member={member}
         //    updateHandler={this.props.updateHandler}
+
             deleteHandler={this.props.deleteHandler}
         />
     });
@@ -147,7 +154,10 @@ var MembersList = React.createClass({
       <tbody>
         {memberRows}
         {/* <MemberForm addHandler={this.props.addHandler} />
-        */}
+        *
+        <AddMember addHandler={this.props.addHandler}
+            bodyVisible={this.state.addMemberBodyVisible}
+        /> */}
       </tbody>
     );
   }
@@ -155,8 +165,8 @@ var MembersList = React.createClass({
 
 var MembersTable = React.createClass({
   render: function(){
-    console.log("MembersTable");
-    console.log(this.props.allMembers);
+    //console.log("MembersTable");
+    //console.log(this.props.allMembers);
     return(
       <table className="table table-bordered">
         <thead>
@@ -181,6 +191,7 @@ var MembersTable = React.createClass({
           </tr>
         </thead>
         <MembersList members={this.props.allMembers}
+            addHandler={this.props.addHandler}
             deleteHandler={this.props.deleteHandler}
         />
       </table>
@@ -191,6 +202,11 @@ var MembersTable = React.createClass({
 
 // Members Component
 var Members = React.createClass({
+  getInitialState : function() {
+    return {
+      addMemberBodyVisible: false
+    };
+  },
   componentDidMount : function() {
     var p = api.getAll();
     p.then( response => {
@@ -214,7 +230,21 @@ var Members = React.createClass({
         localStorage.setItem('members', JSON.stringify(response));
         this.setState({});
       });
-  }, //deleteContact
+  }, //deleteMember
+  addMember : function(fn,ln){
+    api.add(fn,ln);
+    this.setState({
+      name : '',
+      address : '',
+      phone_number : ''
+    });
+  }, //addMember
+  toggleAddMemberDisplay: function() {
+    var tempVisibility = !this.state.addMemberBodyVisible;
+    this.setState({
+      addMemberBodyVisible: tempVisibility
+    });
+  }, //toggleAddMemberDisplay
   render: function(){
     console.log("Members Component");
     var members = localStorage.getItem('members') ?
@@ -222,7 +252,12 @@ var Members = React.createClass({
     return(
       <div className="interface">
         <p>Members</p>
+        <AddMember addHandler={this.props.addHandler}
+            bodyVisible={this.state.addMemberBodyVisible}
+            handleToggleAddMember={this.toggleAddMemberDisplay}
+        />
         <MembersTable allMembers={members}
+            addHandler={this.addMember}
             deleteHandler={this.deleteMember}
         />
 
