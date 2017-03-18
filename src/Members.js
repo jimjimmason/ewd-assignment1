@@ -208,7 +208,7 @@ var Members = React.createClass({
     };
   },
   componentDidMount : function() {
-    var p = api.getAll();
+    var p = api.getAllMembers();
     p.then( response => {
       localStorage.clear();
       localStorage.setItem('members', JSON.stringify(response)) ;
@@ -216,14 +216,14 @@ var Members = React.createClass({
     }) ;
   }, //componentDidMount
   deleteMember_orig : function(key){
-    api.delete(key);
+    api.deleteMember(key);
     this.setState({});
   },
   deleteMember : function(k) {
     console.log("deleting member id: " + k);
-    api.delete(k)
+    api.deleteMember(k)
       .then(response => {
-        return api.getAll()
+        return api.getAllMembers()
       })
       .then(response => {
         localStorage.clear();
@@ -231,13 +231,35 @@ var Members = React.createClass({
         this.setState({});
       });
   }, //deleteMember
-  addMember : function(fn,ln){
-    api.add(fn,ln);
+  addMember : function(fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,type,tino){
+    console.log("adding new member : " + fn + ' ' + ln);
+    api.addMember(fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,type,tino);
+    var p = api.getAllMembers();
+    p.then( response => {
+      localStorage.clear();
+      localStorage.setItem('members', JSON.stringify(response)) ;
+      this.setState({}) ;
+    }) ;
     this.setState({
-      name : '',
-      address : '',
-      phone_number : ''
+      addMemberBodyVisible: false,
+      status: '',
+      id: '',
+      fname: '',
+      lname: '',
+      address1: '',
+      address2: '',
+      town: '',
+      county: '',
+      nationality: '',
+      phone_number: '',
+      email: '',
+      dob: '',
+      yearOfBirth: '',
+      imageUrl: '',
+      type: '',
+      triathlonIrelandID: ''
     });
+
   }, //addMember
   toggleAddMemberDisplay: function() {
     var tempVisibility = !this.state.addMemberBodyVisible;
@@ -246,13 +268,13 @@ var Members = React.createClass({
     });
   }, //toggleAddMemberDisplay
   render: function(){
-    console.log("Members Component");
+    //console.log("Members Component");
     var members = localStorage.getItem('members') ?
       JSON.parse(localStorage.getItem('members')) : [];
     return(
       <div className="interface">
         <p>Members</p>
-        <AddMember addHandler={this.props.addHandler}
+        <AddMember addHandler={this.addMember}
             bodyVisible={this.state.addMemberBodyVisible}
             handleToggleAddMember={this.toggleAddMemberDisplay}
         />

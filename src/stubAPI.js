@@ -1,8 +1,9 @@
 import _ from 'lodash';
+import uuid from 'uuid';
 
 var members =  [
   {
-    "id": 1,
+    "id": uuid.v4(),
     "FirstName": "Jim",
     "Surname": "Mason",
     "Address1": "",
@@ -19,7 +20,7 @@ var members =  [
     "TriathlonIrelandID": "1965IE12431244"
   },
   {
-    "id": 2,
+    "id": uuid.v4(),
     "FirstName": "Brian",
     "Surname": "O'Brien",
     "Address1": "New Street",
@@ -45,7 +46,7 @@ var members =  [
                   });
            return elements;
          },
-         delete : function(k) {
+         deleteMember : function(k) {
             var promise = new Promise( (resolve,reject) => {
                var elements = _.remove(members,
                       function(member) {
@@ -59,7 +60,7 @@ var members =  [
          getAllOrig : function() {
              return members ;
          },
-         getAll : function() {
+         getAllMembers : function() {
            var promise = new Promise ((resolve,reject) => {
                    setTimeout(() => resolve(members),10 );
            }) ;
@@ -67,10 +68,25 @@ var members =  [
          },
 
 //todo  add all fields for new member
-         add : function(fn,ln) {
+         addMember : function(fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,type,tino) {
           var len = members.length ;
           var newL_len = members.push({
-             FirstName: fn, Surname : ln}) ;
+            id: uuid.v4(),
+            FirstName: fn,
+            Surname : ln,
+            Address1: addr1,
+            Address2: addr2,
+            Town: town,
+            County: county,
+            Nationality: nationality,
+            phone_number: phone,
+            email: email,
+            DOB : dob,
+            YearOfBirth: "",
+            imageUrl: "",
+            Type: type,
+            TriathlonIrelandID: tino
+          }) ;
           return newL_len > len ;
          },
          updateOrig : function(key,n,a,p) {
@@ -83,7 +99,7 @@ var members =  [
               }
           return false ;
         },
-        update : function(key,n,a,p) {
+        updateMember : function(key,n,a,p) {
            var promise = new Promise ((resolve,reject) => {
               setTimeout(() => {
                  var index = _.findIndex(members, function(member) {
@@ -101,4 +117,4 @@ var members =  [
         }  // update
       }
 
-      export default stubAPI ;
+export default stubAPI ;
