@@ -14,6 +14,7 @@ var AddMember=React.createClass({
       phone: "",
       email: "",
       dob: "",
+      imageUrl: "",
       type: "",
       tino: ""
     };
@@ -38,6 +39,7 @@ var AddMember=React.createClass({
           this.state.phone,
           this.state.email,
           this.state.dob,
+          this.state.imageUrl,
           this.state.type,
           this.state.tino
     );
@@ -109,6 +111,11 @@ var AddMember=React.createClass({
   handleDobChange : function(e){
     this.setState({
       dob: e.target.value
+    })
+  },
+  handleImageUrlChange : function(e){
+    this.setState({
+      imageUrl: e.target.value
     })
   },
   handleTypeChange : function(e){
@@ -197,6 +204,8 @@ var AddMember=React.createClass({
               <input type="text" className="form-control" id="email" placeholder="Email" value={this.state.email} onChange={this.handleEmailChange}/>
               <label >Date of Birth</label>
               <input type="text" className="form-control" id="dob" placeholder="Date of Birth" value={this.state.dob} onChange={this.handleDobChange}/>
+              <label >Image URL</label>
+              <input type="text" className="form-control" id="imageUrl" placeholder="Image URL" value={this.state.imageUrl} onChange={this.handleImageURlChange}/>
               <label >Membership Type</label>
               <input type="text" className="form-control" id="type" placeholder="Membership Type" value={this.state.type} onChange={this.handleTypeChange}/>
               <label >Triathlon Ireland Membership No.</label>

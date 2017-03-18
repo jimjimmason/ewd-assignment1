@@ -3,8 +3,6 @@ import './App.css'
 import buttons from './config/MembersButtons';
 import api from './stubAPI';
 import AddMember from './AddMember';
-//import _ from 'lodash';
-
 
 var MemberRow = React.createClass({
   getInitialState : function(){
@@ -13,18 +11,17 @@ var MemberRow = React.createClass({
       id: this.props.member.id,
       fname: this.props.member.FirstName,
       lname: this.props.member.Surname,
-      address1: this.props.member.Address1,
-      address2: this.props.member.Address2,
+      addr1: this.props.member.Address1,
+      addr2: this.props.member.Address2,
       town: this.props.member.Town,
       county: this.props.member.County,
       nationality: this.props.member.Nationality,
-      phone_number: this.props.member.phone_number,
+      phone: this.props.member.phone_number,
       email: this.props.member.email,
       dob: this.props.member.DOB,
-      yearOfBirth: this.props.member.YearOfBirth,
       imageUrl: this.props.member.imageUrl,
       type: this.props.member.Type,
-      triathlonIrelandID: this.props.member.TriathlonIrelandID
+      tino: this.props.member.TriathlonIrelandID
     };
   },
   handleDelete : function(){
@@ -39,7 +36,7 @@ var MemberRow = React.createClass({
     this.setState({status : ''});
   },
   handleEdit : function(){
-    this.setState({status: 'edit'})
+    this.setState({status: 'edit'});
   },
   handleCancel : function(){
     this.setState({
@@ -47,19 +44,109 @@ var MemberRow = React.createClass({
       id: this.props.member.id,
       fname: this.props.member.FirstName,
       lname: this.props.member.Surname,
-      address1: this.props.member.Address1,
-      address2: this.props.member.Address2,
+      addr1: this.props.member.Address1,
+      addr2: this.props.member.Address2,
       town: this.props.member.Town,
       county: this.props.member.County,
       nationality: this.props.member.Nationality,
-      phone_number: this.props.member.phone_number,
+      phone: this.props.member.phone_number,
       email: this.props.member.email,
       dob: this.props.member.DOB,
-      yearOfBirth: this.props.member.YearOfBirth,
       imageUrl: this.props.member.imageUrl,
       type: this.props.member.Type,
-      triathlonIrelandID: this.props.member.TriathlonIrelandID
+      tino: this.props.member.TriathlonIrelandID
      });
+  },
+  handleSave : function(e) {
+    console.log("handleSave" + this.state.id)
+      e.preventDefault();
+      var fname = this.state.fname.trim();
+      var lname = this.state.lname.trim();
+      var addr1 = this.state.addr1.trim();
+      var addr2 = this.state.addr2.trim();
+      var town = this.state.town.trim();
+      var county = this.state.county.trim();
+      var nationality = this.state.nationality.trim();
+      var phone = this.state.phone.trim();
+      var email = this.state.email.trim();
+      var dob = this.state.dob.trim();
+      var imageUrl = this.state.imageUrl.trim();
+      var type = this.state.type.trim();
+      var tino = this.state.tino.trim();
+      // check that reqiured fields are populated
+      if (!fname || !lname || !phone || !email || !dob) {
+        console.log("returning")
+        return;
+      }
+      console.log("in the updatehandler")
+      this.props.updateHandler(
+        this.state.id,fname,lname,addr1,addr2,town,county,nationality,phone,email,dob,imageUrl,type,tino);
+      this.setState({status : ''} )
+  },
+  handleFnameChange : function(e){
+    this.setState({
+      fname: e.target.value
+    })
+  },
+  handleLnameChange : function(e){
+    this.setState({
+      lname: e.target.value
+    })
+  },
+  handleAddr1Change : function(e){
+    this.setState({
+      addr1: e.target.value
+    })
+  },
+  handleAddr2Change : function(e){
+    this.setState({
+      addr2: e.target.value
+    })
+  },
+  handleTownChange : function(e){
+    this.setState({
+      town: e.target.value
+    })
+  },
+  handleCountyChange : function(e){
+    this.setState({
+      county: e.target.value
+    })
+  },
+  handleNationalityChange : function(e){
+    this.setState({
+      nationality: e.target.value
+    })
+  },
+  handlePhoneChange : function(e){
+    this.setState({
+      phone: e.target.value
+    })
+  },
+  handleEmailChange : function(e){
+    this.setState({
+      email: e.target.value
+    })
+  },
+  handleDobChange : function(e){
+    this.setState({
+      dob: e.target.value
+    })
+  },
+  handleImageUrlChange : function(e){
+    this.setState({
+      imageUrl: e.target.value
+    })
+  },
+  handleTypeChange : function(e){
+    this.setState({
+      type: e.target.value
+    })
+  },
+  handleTinoChange : function(e){
+    this.setState({
+      tino: e.target.value
+    })
   },
 
   render: function(){
@@ -70,38 +157,76 @@ var MemberRow = React.createClass({
     //console.log("displayMember");
     //console.log(this.props.member.id);
     var fields = [
-      <td key={'id'}>{this.state.id}</td>,
       <td key={'fname'} >{this.state.fname}</td>,
       <td key={'lname'}>{this.state.lname}</td>,
-      <td key={'address1'}>{this.state.address1}</td>,
-      <td key={'address2'}>{this.state.address2}</td>,
+      <td key={'addr1'}>{this.state.addr1}</td>,
+      <td key={'addr2'}>{this.state.addr2}</td>,
       <td key={'town'}>{this.state.town}</td>,
       <td key={'county'}>{this.state.county}</td>,
       <td key={'nationality'}>{this.state.nationality}</td>,
-      <td key={'phone_number'}>{this.state.phone_number}</td>,
+      <td key={'phone'}>{this.state.phone}</td>,
       <td key={'email'}>{this.state.email}</td>,
       <td key={'dob'}>{this.state.dob}</td>,
-      <td key={'yearOfBirth'}>{this.state.yearOfBirth}</td>,
       <td key={'imageUrl'}>{this.state.imageUrl}</td>,
       <td key={'type'}>{this.state.type}</td>,
-      <td key={'triathlonIrelandID'}>{this.state.triathlonIrelandID}</td>
+      <td key={'tino'}>{this.state.tino}</td>
     ];
     if (this.state.status === 'edit') {
       activeButtons = buttons.edit;
       leftButtonHandler = this.handleSave;
       rightButtonHandler = this.handleCancel;
       fields = [
-        <td key={'name'}><input type="text" className="form-control"
-            value={this.state.name}
-            onChange={this.handleNameChange} />
+        <td key={'fname'}><input type="text" className="form-control"
+            value={this.state.fname}
+            onChange={this.handleFnameChange} />
         </td>,
-        <td key={'address'}><input type="text" className="form-control"
-            value={this.state.address}
-            onChange={this.handleAddressChange} />
+        <td key={'lname'}><input type="text" className="form-control"
+            value={this.state.lname}
+            onChange={this.handleLnameChange} />
         </td>,
-        <td key={'phone_number'}><input type="text" className="form-control"
-            value={this.state.phone_number}
-            onChange={this.handlePhoneNumberChange} />
+        <td key={'addr1'}><input type="text" className="form-control"
+            value={this.state.addr1}
+            onChange={this.handleAddr1Change} />
+        </td>,
+        <td key={'addr2'}><input type="text" className="form-control"
+            value={this.state.addr2}
+            onChange={this.handleAddr2Change} />
+        </td>,
+        <td key={'town'}><input type="text" className="form-control"
+            value={this.state.town}
+            onChange={this.handleTownChange} />
+        </td>,
+        <td key={'county'}><input type="text" className="form-control"
+            value={this.state.county}
+            onChange={this.handleCountyChange} />
+        </td>,
+        <td key={'nationality'}><input type="text" className="form-control"
+            value={this.state.nationality}
+            onChange={this.handleNationalityChange} />
+        </td>,
+        <td key={'phone'}><input type="text" className="form-control"
+            value={this.state.phone}
+            onChange={this.handlePhoneChange} />
+        </td>,
+        <td key={'email'}><input type="text" className="form-control"
+            value={this.state.email}
+            onChange={this.handleEmailChange} />
+        </td>,
+        <td key={'dob'}><input type="text" className="form-control"
+            value={this.state.dob}
+            onChange={this.handleDobChange} />
+        </td>,
+        <td key={'imageUrl'}><input type="text" className="form-control"
+            value={this.state.imageUrl}
+            onChange={this.handleImageUrlChange} />
+        </td>,
+        <td key={'type'}><input type="text" className="form-control"
+            value={this.state.type}
+            onChange={this.handleTypeChange} />
+        </td>,
+        <td key={'tino'}><input type="text" className="form-control"
+            value={this.state.tino}
+            onChange={this.handleTinoChange} />
         </td>
       ];
     }
@@ -144,8 +269,7 @@ var MembersList = React.createClass({
     //var contactRows = null; //TODO  initailize to an array of contact elements
     var memberRows = this.props.members.map(member => {
         return <MemberRow key={member.id} member={member}
-        //    updateHandler={this.props.updateHandler}
-
+            updateHandler={this.props.updateHandler}
             deleteHandler={this.props.deleteHandler}
         />
     });
@@ -153,11 +277,6 @@ var MembersList = React.createClass({
     return (
       <tbody>
         {memberRows}
-        {/* <MemberForm addHandler={this.props.addHandler} />
-        *
-        <AddMember addHandler={this.props.addHandler}
-            bodyVisible={this.state.addMemberBodyVisible}
-        /> */}
       </tbody>
     );
   }
@@ -171,7 +290,6 @@ var MembersTable = React.createClass({
       <table className="table table-bordered">
         <thead>
           <tr>
-            <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Address 1</th>
@@ -182,7 +300,6 @@ var MembersTable = React.createClass({
             <th>Phone Number</th>
             <th>E-mail</th>
             <th>DOB</th>
-            <th>Year of Birth</th>
             <th>Image</th>
             <th>Membership Type</th>
             <th>Triathlon Ireland #</th>
@@ -192,6 +309,7 @@ var MembersTable = React.createClass({
         </thead>
         <MembersList members={this.props.allMembers}
             addHandler={this.props.addHandler}
+            updateHandler={this.props.updateHandler}
             deleteHandler={this.props.deleteHandler}
         />
       </table>
@@ -231,9 +349,9 @@ var Members = React.createClass({
         this.setState({});
       });
   }, //deleteMember
-  addMember : function(fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,type,tino){
+  addMember : function(fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,imageUrl,type,tino){
     console.log("adding new member : " + fn + ' ' + ln);
-    api.addMember(fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,type,tino);
+    api.addMember(fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,imageUrl,type,tino);
     var p = api.getAllMembers();
     p.then( response => {
       localStorage.clear();
@@ -242,25 +360,23 @@ var Members = React.createClass({
     }) ;
     this.setState({
       addMemberBodyVisible: false,
-      status: '',
-      id: '',
-      fname: '',
-      lname: '',
-      address1: '',
-      address2: '',
-      town: '',
-      county: '',
-      nationality: '',
-      phone_number: '',
-      email: '',
-      dob: '',
-      yearOfBirth: '',
-      imageUrl: '',
-      type: '',
-      triathlonIrelandID: ''
     });
-
   }, //addMember
+
+  updateMember : function(key,fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,imageUrl,type,tino) {
+    console.log("updateMember" + key + fn);
+    api.updateMember(key,fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,imageUrl,type,tino)
+      .then ( response => {
+         return api.getAllMembers()
+      })
+      .then( response => {
+          localStorage.clear();
+          localStorage.setItem('members', JSON.stringify(response)) ;
+          this.setState( {}) ;
+      })
+      .catch( error => {console.log(`Update failed for ${error}` )}  ) ;
+  }, // updateMember
+
   toggleAddMemberDisplay: function() {
     var tempVisibility = !this.state.addMemberBodyVisible;
     this.setState({
@@ -280,6 +396,7 @@ var Members = React.createClass({
         />
         <MembersTable allMembers={members}
             addHandler={this.addMember}
+            updateHandler={this.updateMember}
             deleteHandler={this.deleteMember}
         />
 

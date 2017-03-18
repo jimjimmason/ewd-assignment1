@@ -14,7 +14,6 @@ var members =  [
     "phone_number": "0881234567",
     "email": "jmason@eircom.net",
     "DOB" : "1965-10-10",
-    "YearOfBirth": "1965",
     "imageUrl": "",
     "Type": "Administrator",
     "TriathlonIrelandID": "1965IE12431244"
@@ -31,7 +30,6 @@ var members =  [
     "phone_number": "0885568648",
     "email": "bobrien@somewhere.net",
     "DOB" : "1986-07-07",
-    "YearOfBirth": "1986",
     "imageUrl":"",
     "Type": "Member",
     "TriathlonIrelandID": ""
@@ -68,7 +66,7 @@ var members =  [
          },
 
 //todo  add all fields for new member
-         addMember : function(fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,type,tino) {
+         addMember : function(fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,imageUrl,type,tino) {
           var len = members.length ;
           var newL_len = members.push({
             id: uuid.v4(),
@@ -82,8 +80,7 @@ var members =  [
             phone_number: phone,
             email: email,
             DOB : dob,
-            YearOfBirth: "",
-            imageUrl: "",
+            imageUrl: imageUrl,
             Type: type,
             TriathlonIrelandID: tino
           }) ;
@@ -99,19 +96,33 @@ var members =  [
               }
           return false ;
         },
-        updateMember : function(key,n,a,p) {
+        updateMember : function(key,fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,imageUrl,type,tino) {
            var promise = new Promise ((resolve,reject) => {
               setTimeout(() => {
                  var index = _.findIndex(members, function(member) {
                      return member.id === key;
                  } );
                 if (index !== -1) {
-                    members.splice(index, 1, {name: n, address: a, phone_number: p});
+                    members.splice(index, 1, {
+                      FirstName: fn,
+                      Surname : ln,
+                      Address1: addr1,
+                      Address2: addr2,
+                      Town: town,
+                      County: county,
+                      Nationality: nationality,
+                      phone_number: phone,
+                      email: email,
+                      DOB : dob,
+                      imageUrl: imageUrl,
+                      Type: type,
+                      TriathlonIrelandID: tino
+                    });
                     resolve(true);
                 } else {
                     reject(key) ;
                 }
-              },1000) ;
+              },10) ;
            });
            return promise ;
         }  // update
