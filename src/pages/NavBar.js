@@ -23,31 +23,47 @@ export default class NavBAr extends React.Component {
     const navClass = collapsed ? "collapse" : "";
 
     return (
-      <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div className="container">
-          <div className="navbar-header">
-            <button type="button" className="navbar-toggle" onClick={this.toggleCollapse.bind(this)} >
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
+      <div className="container">
+  <div className="c-wrapper">
+    <nav role="navigation" className="navbar navbar-inverse">
+
+        <div className="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" className="navbar-toggle">
+                <span className="sr-only">Toggle navigation</span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
             </button>
-          </div>
-          <div className={"navbar-collapse " + navClass} id="bs-example-navbar-collapse-1">
-            <ul className="nav navbar-nav">
-              <li activeClassName="active" onlyActiveOnIndex={true}>
-                <IndexLink to="/" onClick={this.toggleCollapse.bind(this)}>Featured</IndexLink>
-              </li>
-              <li activeClassName="active">
-                <Link to="archives" onClick={this.toggleCollapse.bind(this)}>Archives</Link>
-              </li>
-              <li activeClassName="active">
-                <Link to="settings" onClick={this.toggleCollapse.bind(this)}>Settings</Link>
-              </li>
-            </ul>
-          </div>
+            <a href="#" className="navbar-brand">Brand</a>
         </div>
-      </nav>
+
+        <div id="navbarCollapse" className="collapse navbar-collapse">
+            <ul className="nav navbar-nav">
+                <li className="active"><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li className="dropdown">
+                    <a data-toggle="dropdown" className="dropdown-toggle" href="#">Messages <b className="caret"></b></a>
+                    <ul role="menu" className="dropdown-menu">className
+                        <li><a href="#">Inbox</a></li>
+                        <li><a href="#">Drafts</a></li>
+                        <li><a href="#">Sent Items</a></li>
+                        <li className="divider"></li>
+                        <li><a href="#">Trash</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form role="search" className="navbar-form navbar-left">
+                <div className="form-group">
+                    <input type="text" placeholder="Search" className="form-control" />
+                </div>
+            </form>
+            <ul className="nav navbar-nav navbar-right">
+                <li><a href="#">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+  </div>
+</div>
     );
   }
 }

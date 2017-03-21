@@ -8,11 +8,12 @@ import Events from './Events';
 import Layout from './pages/Layout';
 import User from './pages/User';
 import About from './pages/About';
+import Info from './pages/Info';
 
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={Layout}>
-      <IndexRoute component={Events} />
+      <IndexRoute component={Info} />
       <Route path="user" component={User} />
       <Route path="about" component={About} />
       <Route path="admin" component={Members} />
