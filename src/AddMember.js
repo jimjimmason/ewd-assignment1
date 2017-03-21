@@ -1,4 +1,5 @@
 import React from 'react';
+//import MemberType from './MemberType';
 
 var AddMember=React.createClass({
   getInitialState : function() {
@@ -14,18 +15,13 @@ var AddMember=React.createClass({
       phone: "",
       email: "",
       dob: "",
+      gender: "male",
       imageUrl: "",
       type: "",
-      tino: ""
+      tino: "",
+      selectCounty: "Tipperary"
     };
-  },
-  handleAddContact : function(){
-    console.log(this.props);
-    this.props.addHandler(this.state.name,this.state.address,this.state.phone_number);
-    this.setState({name : "",
-    address : "",
-    phone_number : ""});
-  },
+  }, //getInitialState
   handleAdd: function(e) {
     e.preventDefault();
     this.props.addHandler(
@@ -34,13 +30,14 @@ var AddMember=React.createClass({
           this.state.addr1,
           this.state.addr2,
           this.state.town,
-          this.state.county,
+          this.state.selectCounty,
           this.state.nationality,
           this.state.phone,
           this.state.email,
           this.state.dob,
+          this.state.gender,
           this.state.imageUrl,
-          this.state.type,
+          this.state.memberType,
           this.state.tino
     );
     this.setState({
@@ -55,9 +52,12 @@ var AddMember=React.createClass({
       phone: '',
       email: '',
       dob: '',
+      gender: 'male',
       imageUrl: '',
       type: '',
-      tino: ''
+      tino: '',
+      selectCounty: "Tippreary",
+      memberType: ''
     });
   }, // handleAdd
   toggleAddMemberDisplay: function() {
@@ -113,6 +113,11 @@ var AddMember=React.createClass({
       dob: e.target.value
     })
   },
+  handleGenderChange : function(e){
+    this.setState({
+      gender: e.target.value
+    })
+  },
   handleImageUrlChange : function(e){
     this.setState({
       imageUrl: e.target.value
@@ -128,9 +133,16 @@ var AddMember=React.createClass({
       tino: e.target.value
     })
   },
+  handleSelectCounty: function(e){
+    this.setState({ selectCounty: e.target.value })
+  },
+  handleMemberType: function(e){
+    this.setState({memberType: e.target.value})
+    //this.setState({memberType: memberType })
+  },
 
   render: function() {
-    // for inline stype to hide or display form body
+    // for inline style to hide or display form body
     var displayAddMemberBody={
       display: this.props.bodyVisible ? 'block': 'none'
     };
@@ -141,7 +153,10 @@ var AddMember=React.createClass({
         </div>
         <div className="panel-body" style={displayAddMemberBody}>
           <form role="form">
+
             <div className="form-group">
+
+
               <label >First Name</label>
               <input type="text" className="form-control" id="fname" placeholder="First Name" value={this.state.fname} onChange={this.handleFnameChange}/>
               <label >Last Name</label>
@@ -152,48 +167,6 @@ var AddMember=React.createClass({
               <input type="text" className="form-control" id="addr2" placeholder="Address 2" value={this.state.addr2} onChange={this.handleAddr2Change}/>
               <label >Town</label>
               <input type="text" className="form-control" id="town" placeholder="Town" value={this.state.town} onChange={this.handleTownChange}/>
-{/*              <div className="dropdown">
-                 <button type="button" className="btn btn-primary dropdown-toggle"
-                 data-toggle="dropdown">
-                    Select County <span className="caret"></span>
-                 </button>
-
-                 <ul className="dropdown-menu" >
-                    <li><a href="#">Antrim</a></li>
-                    <li><a href="#">Armagh</a></li>
-                    <li><a href="#">Carlow</a></li>
-                    <li><a href="#">Cavan</a></li>
-                    <li><a href="#">Clare</a></li>
-                    <li><a href="#">Cork</a></li>
-                    <li><a href="#">Derry</a></li>
-                    <li><a href="#">Donegal</a></li>
-                    <li><a href="#">Down</a></li>
-                    <li><a href="#">Dublin</a></li>
-                    <li><a href="#">Fermanagh</a></li>
-                    <li><a href="#">Galway</a></li>
-                    <li><a href="#">Kerry</a></li>
-                    <li><a href="#">Kildare</a></li>
-                    <li><a href="#">Kilkenny</a></li>
-                    <li><a href="#">Laois</a></li>
-                    <li><a href="#">Leitrim</a></li>
-                    <li><a href="#">Limerick</a></li>
-                    <li><a href="#">Longford</a></li>
-                    <li><a href="#">Louth</a></li>
-                    <li><a href="#">Mayo</a></li>
-                    <li><a href="#">Meath</a></li>
-                    <li><a href="#">Monaghan</a></li>
-                    <li><a href="#">Offaly</a></li>
-                    <li><a href="#">Roscommon</a></li>
-                    <li><a href="#">Sligo</a></li>
-                    <li><a href="#">Tipperary</a></li>
-                    <li><a href="#">Tyrone</a></li>
-                    <li><a href="#">Waterford</a></li>
-                    <li><a href="#">Westmeath</a></li>
-                    <li><a href="#">Wexford</a></li>
-                    <li><a href="#">Wicklow  </a></li>
-                  </ul>
-              </div>
-*/}
               <label >County</label>
               <input type="text" className="form-control" id="county" placeholder="County" value={this.state.county} onChange={this.handleCountyChange}/>
               <label >Nationality</label>
@@ -204,10 +177,36 @@ var AddMember=React.createClass({
               <input type="text" className="form-control" id="email" placeholder="Email" value={this.state.email} onChange={this.handleEmailChange}/>
               <label >Date of Birth</label>
               <input type="text" className="form-control" id="dob" placeholder="Date of Birth" value={this.state.dob} onChange={this.handleDobChange}/>
+
+              <div className="form-group">
+                <label>Gender
+                <select value={this.state.gender} onChange={this.handleGenderChange}>
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Other">Other</option>
+                </select>
+                </label>
+              </div>
+
               <label >Image URL</label>
               <input type="text" className="form-control" id="imageUrl" placeholder="Image URL" value={this.state.imageUrl} onChange={this.handleImageURlChange}/>
-              <label >Membership Type</label>
-              <input type="text" className="form-control" id="type" placeholder="Membership Type" value={this.state.type} onChange={this.handleTypeChange}/>
+              <div className="form-group">
+                <label>Membership Type
+                  <select value={this.state.memberType} onChange={this.handleMemberType}>
+                    <option value="Administrator">Administrator</option>
+                    <option value="user">Site User</option>
+                    <option value="senior">Senior</option>
+                    <option value="u23Race">U23 Race</option>
+                    <option value="juniorRace">Junior Race (17-19Yrs)</option>
+                    <option value="youth">Youth (15-16Yrs)</option>
+                    <option value="kids">Kids U15</option>
+                    <option value="training">Training</option>
+                    <option value="joint">Joint Triathlon and Swim Ireland</option>
+                  </select>
+                </label>
+              </div>
+
+            {/*  <MemberType handleMemberTypeChange={this.props.handleMemberType} />   */}
               <label >Triathlon Ireland Membership No.</label>
               <input type="text" className="form-control" id="tino" placeholder="Triathlon Ireland Membership No." value={this.state.tino} onChange={this.handleTinoChange}/>
 

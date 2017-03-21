@@ -19,6 +19,7 @@ var MemberRow = React.createClass({
       phone: this.props.member.phone_number,
       email: this.props.member.email,
       dob: this.props.member.DOB,
+      gender: this.props.member.gender,
       imageUrl: this.props.member.imageUrl,
       type: this.props.member.Type,
       tino: this.props.member.TriathlonIrelandID
@@ -52,6 +53,7 @@ var MemberRow = React.createClass({
       phone: this.props.member.phone_number,
       email: this.props.member.email,
       dob: this.props.member.DOB,
+      gender: this.props.member.gender,
       imageUrl: this.props.member.imageUrl,
       type: this.props.member.Type,
       tino: this.props.member.TriathlonIrelandID
@@ -70,6 +72,7 @@ var MemberRow = React.createClass({
       var phone = this.state.phone.trim();
       var email = this.state.email.trim();
       var dob = this.state.dob.trim();
+      var gender = this.state.gender;
       var imageUrl = this.state.imageUrl.trim();
       var type = this.state.type.trim();
       var tino = this.state.tino.trim();
@@ -80,7 +83,7 @@ var MemberRow = React.createClass({
       }
       console.log("in the updatehandler")
       this.props.updateHandler(
-        this.state.id,fname,lname,addr1,addr2,town,county,nationality,phone,email,dob,imageUrl,type,tino);
+        this.state.id,fname,lname,addr1,addr2,town,county,nationality,phone,email,dob,gender,imageUrl,type,tino);
       this.setState({status : ''} )
   },
   handleFnameChange : function(e){
@@ -133,6 +136,11 @@ var MemberRow = React.createClass({
       dob: e.target.value
     })
   },
+  handleGenderChange : function(e){
+    this.setState({
+      gender: e.target.value
+    })
+  },
   handleImageUrlChange : function(e){
     this.setState({
       imageUrl: e.target.value
@@ -147,6 +155,9 @@ var MemberRow = React.createClass({
     this.setState({
       tino: e.target.value
     })
+  },
+  handleMemberType: function(e){
+    this.setState({ type: e.target.value });
   },
 
   render: function(){
@@ -167,6 +178,7 @@ var MemberRow = React.createClass({
       <td key={'phone'}>{this.state.phone}</td>,
       <td key={'email'}>{this.state.email}</td>,
       <td key={'dob'}>{this.state.dob}</td>,
+      <td key={'gender'}>{this.state.gender}</td>,
       <td key={'imageUrl'}>{this.state.imageUrl}</td>,
       <td key={'type'}>{this.state.type}</td>,
       <td key={'tino'}>{this.state.tino}</td>
@@ -216,13 +228,35 @@ var MemberRow = React.createClass({
             value={this.state.dob}
             onChange={this.handleDobChange} />
         </td>,
+        <td key={'gender'}>
+          {/*<input type="text" className="form-control"
+            value={this.state.gender}
+            onChange={this.handleGenderChange} /> */}
+            <select value={this.state.gender} onChange={this.handleGenderChange}>
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
+              <option value="Other">Other</option>
+            </select>
+        </td>,
         <td key={'imageUrl'}><input type="text" className="form-control"
             value={this.state.imageUrl}
             onChange={this.handleImageUrlChange} />
         </td>,
-        <td key={'type'}><input type="text" className="form-control"
+        <td key={'type'}>
+          {/*<input type="text" className="form-control"
             value={this.state.type}
-            onChange={this.handleTypeChange} />
+            onChange={this.handleTypeChange} /> */}
+            <select value={this.state.type} onChange={this.handleMemberType}>
+              <option value="Administrator">Administrator</option>
+              <option value="user">Site User</option>
+              <option value="senior">Senior</option>
+              <option value="u23Race">U23 Race</option>
+              <option value="juniorRace">Junior Race (17-19Yrs)</option>
+              <option value="youth">Youth (15-16Yrs)</option>
+              <option value="kids">Kids U15</option>
+              <option value="training">Training</option>
+              <option value="joint">Joint Triathlon and Swim Ireland</option>
+            </select>
         </td>,
         <td key={'tino'}><input type="text" className="form-control"
             value={this.state.tino}
@@ -300,6 +334,7 @@ var MembersTable = React.createClass({
             <th>Phone Number</th>
             <th>E-mail</th>
             <th>DOB</th>
+            <th>Gender</th>
             <th>Image</th>
             <th>Membership Type</th>
             <th>Triathlon Ireland #</th>
@@ -349,9 +384,9 @@ var Members = React.createClass({
         this.setState({});
       });
   }, //deleteMember
-  addMember : function(fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,imageUrl,type,tino){
+  addMember : function(fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,gender,imageUrl,type,tino){
     console.log("adding new member : " + fn + ' ' + ln);
-    api.addMember(fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,imageUrl,type,tino);
+    api.addMember(fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,gender,imageUrl,type,tino);
     var p = api.getAllMembers();
     p.then( response => {
       localStorage.clear();
@@ -363,9 +398,9 @@ var Members = React.createClass({
     });
   }, //addMember
 
-  updateMember : function(key,fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,imageUrl,type,tino) {
+  updateMember : function(key,fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,gender,imageUrl,type,tino) {
     console.log("updateMember" + key + fn);
-    api.updateMember(key,fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,imageUrl,type,tino)
+    api.updateMember(key,fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,gender,imageUrl,type,tino)
       .then ( response => {
          return api.getAllMembers()
       })

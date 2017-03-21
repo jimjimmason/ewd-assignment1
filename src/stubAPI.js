@@ -14,6 +14,7 @@ var members =  [
     "phone_number": "0881234567",
     "email": "jmason@eircom.net",
     "DOB" : "1965-10-10",
+    "gender" : "male",
     "imageUrl": "",
     "Type": "Administrator",
     "TriathlonIrelandID": "1965IE12431244"
@@ -30,20 +31,43 @@ var members =  [
     "phone_number": "0885568648",
     "email": "bobrien@somewhere.net",
     "DOB" : "1986-07-07",
+    "gender": "male",
     "imageUrl":"",
-    "Type": "Member",
+    "Type": "race",
     "TriathlonIrelandID": ""
   }
 ];
 
+var events =  [
+  {
+    "id": uuid.v4(),
+    "eventDate": "2017-04-15",
+    "eventName": "Nenagh Sprint (poolswim)",
+    "eventType": "Triathlon",
+    "distance": ["Sprint"],
+    "raceSeries": "Nationl Series",
+    "ageGroup": ["adults","children"],
+    "county": "Tipperary",
+    "eventurl": "www.nenaghtriathlon.com",
+    "membersCompeting": ["jim mason","fred flinstone"],
+    "membersCompetingCount": 2
+  },
+  {
+    "id": uuid.v4(),
+    "eventDate": "2017-04-19",
+    "eventName": "Portlaoise Sprint (poolswim)",
+    "eventType": "Triathlon",
+    "distance": ["Sprint","Try-a-Try"],
+    "raceSeries": "",
+    "ageGroup": ["adults"],
+    "county": "Laois",
+    "eventUrl": "www.laoistriathlon.com",
+    "membersCompeting": [],
+    "membersCompetingCount": 0
+  }
+];
+
     var stubAPI = {
-         deleteOrig : function(k) {
-           var elements = _.remove(members,
-               function(member) {
-                     return member.id === k;
-                  });
-           return elements;
-         },
          deleteMember : function(k) {
             var promise = new Promise( (resolve,reject) => {
                var elements = _.remove(members,
@@ -55,9 +79,6 @@ var members =  [
             return promise ;
 
           },
-         getAllOrig : function() {
-             return members ;
-         },
          getAllMembers : function() {
            var promise = new Promise ((resolve,reject) => {
                    setTimeout(() => resolve(members),10 );
@@ -65,8 +86,8 @@ var members =  [
            return promise ;
          },
 
-//todo  add all fields for new member
-         addMember : function(fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,imageUrl,type,tino) {
+         addMember : function(fn,ln,addr1,addr2,town,county,nationality,phone
+              ,email,dob,gender,imageUrl,type,tino) {
           var len = members.length ;
           var newL_len = members.push({
             id: uuid.v4(),
@@ -80,23 +101,14 @@ var members =  [
             phone_number: phone,
             email: email,
             DOB : dob,
+            gender: gender,
             imageUrl: imageUrl,
             Type: type,
             TriathlonIrelandID: tino
           }) ;
           return newL_len > len ;
-         },
-         updateOrig : function(key,n,a,p) {
-            var index = _.findIndex(members, function(member) {
-                 return member.id === key;
-              } );
-            if (index !== -1) {
-               members.splice(index, 1, {name: n, address: a, phone_number: p});
-               return true ;
-              }
-          return false ;
-        },
-        updateMember : function(key,fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,imageUrl,type,tino) {
+        },  // addMember
+        updateMember : function(key,fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,gender,imageUrl,type,tino) {
            var promise = new Promise ((resolve,reject) => {
               setTimeout(() => {
                  var index = _.findIndex(members, function(member) {
@@ -114,6 +126,7 @@ var members =  [
                       phone_number: phone,
                       email: email,
                       DOB : dob,
+                      gender: gender,
                       imageUrl: imageUrl,
                       Type: type,
                       TriathlonIrelandID: tino
@@ -125,7 +138,73 @@ var members =  [
               },10) ;
            });
            return promise ;
-        }  // update
-      }
+        },  // update
+
+      // END MEMBERS SECTION
+
+      // EVENTS
+      getAllEvents : function() {
+        var promise = new Promise ((resolve,reject) => {
+                setTimeout(() => resolve(events),10 );
+        }) ;
+        return promise ;
+      },
+
+      deleteEvent : function(k) {
+         var promise = new Promise( (resolve,reject) => {
+            var elements = _.remove(events,
+                   function(event) {
+                       return event.id === k;
+                  });
+             setTimeout(() => resolve(elements),10 );
+         }) ;
+         return promise ;
+       },
+       addEvent : function(eDate,eName,eType,distance,series,ageGroup,county,eventUrl) {
+        var len = events.length ;
+        var newL_len = events.push({
+          id: uuid.v4(),
+          eventDate: eDate,
+          eventName: eName,
+          eventType : eType,
+          distance: distance,
+          raceSeries: series,
+          ageGroup: ageGroup,
+          county: county,
+          eventUrl: eventUrl
+        }) ;
+        return newL_len > len ;
+       },  // addMember
+       updateEvent : function(key,eDate,eName,eType,distance,series,ageGroup,county,
+            eventUrl,membersCompeting,membersCompetingCount) {
+         var promise = new Promise ((resolve,reject) => {
+            setTimeout(() => {
+               var index = _.findIndex(events, function(event) {
+                   return event.id === key;
+               } );
+              if (index !== -1) {
+                  members.splice(index, 1, {
+                    eventDate: eDate,
+                    eventName: eName,
+                    eventType : eType,
+                    distance: distance,
+                    raceSeries: series,
+                    ageGroup: ageGroup,
+                    county: county,
+                    eventUrl: eventUrl,
+                    membersCompeting: membersCompeting,
+                    membersCompetingCount: membersCompetingCount
+                  });
+                  resolve(true);
+              } else {
+                  reject(key) ;
+              }
+            },10) ;
+         });
+         return promise ;
+       }  // update
+    }
+
+
 
 export default stubAPI ;
