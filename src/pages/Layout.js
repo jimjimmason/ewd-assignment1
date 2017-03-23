@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "react-router";
+//import { Link } from "react-router";
 
 import Footer from "./Footer";
 import NavBar from "./NavBar";
-import Carousel from "./Carousel";
+//import Carousel from "./Carousel";
 
 export default class Layout extends React.Component {
   render() {
@@ -14,27 +14,17 @@ export default class Layout extends React.Component {
     console.log("layout");
     return (
       <div>
-
-          <NavBar location={location} />
-         {Carousel}  carousel not working in page
+        <NavBar location={location} />
         <div className="container" style={containerStyle}>
           <div className="row">
             <div className="col-lg-12">
-
               <h1>Thurles Triathlon</h1>
-              <Link to="about">about</Link>
-              <Link to="user">user</Link>
-              <Link to="/">home</Link>
-              <Link to="admin" className="btn btn-danger">Admin</Link>
-
               {this.props.children}
-
             </div>
           </div>
           <Footer/>
         </div>
       </div>
-
     );
   }
 }

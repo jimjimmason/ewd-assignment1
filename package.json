@@ -3,10 +3,12 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
+    "expose-loader": "^0.7.3",
     "react-scripts": "0.2.1"
   },
   "dependencies": {
     "bootstrap": "^3.3.6",
+    "jquery": "^3.2.1",
     "lodash": "^2.4.2",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
