@@ -3,7 +3,7 @@ import './App.css'
 import buttons from './config/MembersButtons';
 import api from './stubAPI';
 import AddMember from './AddMember';
-import SearchMembers from './SearchEvents';
+import SearchMembers from './SearchMembers';
 import _ from 'lodash';
 
 var MemberRow = React.createClass({

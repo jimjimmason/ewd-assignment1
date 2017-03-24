@@ -146,10 +146,11 @@ var AddMember=React.createClass({
     var displayAddMemberBody={
       display: this.props.bodyVisible ? 'block': 'none'
     };
+
     return(
       <div className="panel panel-primary">
         <div className="panel-heading" onClick={this.toggleAddMemberDisplay} >
-          <span className="glyphicon glyphicon-plus"></span> Add Member
+          <span className="glyphicon glyphicon-plus"></span> {this.props.registerUser ? "Register Details": "Add Member"}
         </div>
         <div className="panel-body" style={displayAddMemberBody}>
           <form role="form">
@@ -212,23 +213,6 @@ var AddMember=React.createClass({
 
            </div>
 
-    {/*
-
-
-      dob: this.props.member.DOB,
-      yearOfBirth: this.props.member.YearOfBirth,  ---DERIVE THIS FROM DOB
-      imageUrl: this.props.member.imageUrl,          fILE PICKER
-      type: this.props.member.Type,                  DROP DOWN LIST
-      triathlonIrelandID: this.props.member.TriathlonIrelandID
-      <div className="form-group">
-                <label for="inputfile">Image</label>
-                <input type="file" id="inputfile" />
-                <p className="help-block">Example block-level help text here.</p>
-             </div>
-             <div className="checkbox">
-                <label><input type="checkbox" /> Check me out</label>
-             </div>
-    */}
             <button className="btn btn-default" onClick={this.handleAdd}>Add Member</button>
           </form>
         </div>

@@ -52,6 +52,7 @@ export default class NavBAr extends React.Component {
                   <input type="password" className="form-control navbar-btn" id="inputPassword" placeholder="Password" />
                 </div></li>
                 <li><a href="#">Login</a></li>
+                <li><a href="register">Register</a></li>
             </ul>
           </form>
         </div>

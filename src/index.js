@@ -11,6 +11,7 @@ import Layout from './pages/Layout';
 import User from './pages/User';
 import About from './pages/About';
 import Info from './pages/Info';
+import Register from './pages/Register';
 
 ReactDOM.render((
   <Router history={browserHistory}>
@@ -19,6 +20,7 @@ ReactDOM.render((
       <Route path="user" component={User} />
       <Route path="about" component={About} />
       <Route path="admin" component={Members} />
+      <Route path="register" component={Register} />
     </Route>
   </Router>
 ),
