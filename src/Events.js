@@ -249,7 +249,7 @@ var EventsTable = React.createClass({
     console.log("events table");
     console.log(this.props.allevents);
     return(
-      <table className="table table-bordered">
+      <table className="table table-striped table-hover table-condensed">
         <thead>
           <tr>
             <th>Event Date</th>
@@ -367,7 +367,7 @@ var Events = React.createClass({
       // Filter the events list by search text
       var filteredEvents = events.filter(function(e) {
         return e.eventName.toLowerCase().search(
-          this.state.queryText.toLowerCase() ) != -1;
+          this.state.queryText.toLowerCase() ) !== -1;
         }.bind(this) );
         //sort the filtered list by specified order
         filteredEvents = _.sortBy(filteredEvents, this.state.orderBy);
@@ -381,10 +381,10 @@ var Events = React.createClass({
         />
 */}
         <SearchEvents
-          orderBy = {this.state.orderBy}
-          orderDir = {this.state.orderDir}
-          onReOrder = {this.reOrder}
-          onSearch = {this.searchEvents}
+          orderBy={this.state.orderBy}
+          orderDir={this.state.orderDir}
+          onReOrder={this.reOrder}
+          onSearch={this.searchEvents}
         />
 
         <EventsTable allEvents={filteredEvents}

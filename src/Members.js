@@ -3,6 +3,8 @@ import './App.css'
 import buttons from './config/MembersButtons';
 import api from './stubAPI';
 import AddMember from './AddMember';
+import SearchMembers from './SearchEvents';
+import _ from 'lodash';
 
 var MemberRow = React.createClass({
   getInitialState : function(){
@@ -318,7 +320,7 @@ var MembersTable = React.createClass({
     //console.log("MembersTable");
     //console.log(this.props.allMembers);
     return(
-      <table className="table table-bordered">
+      <table className="table table-striped table-hover table-condensed">
         <thead>
           <tr>
             <th>First Name</th>
@@ -354,7 +356,10 @@ var MembersTable = React.createClass({
 var Members = React.createClass({
   getInitialState : function() {
     return {
-      addMemberBodyVisible: false
+      addMemberBodyVisible: false,
+      orderBy: 'eventDate',
+      orderDir: 'asc',
+      queryText: '',
     };
   },
   componentDidMount : function() {
@@ -415,10 +420,35 @@ var Members = React.createClass({
       addMemberBodyVisible: tempVisibility
     });
   }, //toggleAddMemberDisplay
+
+  reOrder: function(orderBy, orderDir) {
+    this.setState({
+      orderBy: orderBy,
+      orderDir: orderDir,
+      queryText: ''
+    });
+  },
+
+  searchMembers(q) {
+    this.setState({
+      queryText: q
+    });
+  },
+
   render: function(){
     //console.log("Members Component");
     var members = localStorage.getItem('members') ?
       JSON.parse(localStorage.getItem('members')) : [];
+console.log ("members jim" + members)
+      // Filter the Members list by search text
+      var filteredMembers = members.filter(function(m) {
+        return m.Surname.toLowerCase().search(
+          this.state.queryText.toLowerCase())!== -1;
+        }.bind(this) );
+        //sort the filtered list by specified order
+        filteredMembers = _.sortBy(filteredMembers, this.state.orderBy);
+
+
     return(
       <div className="interface">
         <p>Members</p>
@@ -426,7 +456,13 @@ var Members = React.createClass({
             bodyVisible={this.state.addMemberBodyVisible}
             handleToggleAddMember={this.toggleAddMemberDisplay}
         />
-        <MembersTable allMembers={members}
+        <SearchMembers
+          orderBy={this.state.orderBy}
+          orderDir={this.state.orderDir}
+          onReOrder={this.reOrder}
+          onSearch={this.searchMembers}
+        />
+        <MembersTable allMembers={filteredMembers}
             addHandler={this.addMember}
             updateHandler={this.updateMember}
             deleteHandler={this.deleteMember}
