@@ -2,10 +2,9 @@ import React from 'react';
 import './App.css'
 import buttons from './config/MembersButtons';
 import api from './stubAPI';
+import AddEvent from './AddEvent';
 import SearchEvents from './SearchEvents';
 import _ from 'lodash';
-
-//import AddMember from './AddMember';
 
 var EventRow = React.createClass({
   getInitialState : function(){
@@ -31,7 +30,6 @@ var EventRow = React.createClass({
     this.setState({status : ''});
   },
   handleConfirm : function(){
-    console.log("confirm pressed"  + this.state.id);
     this.props.deleteHandler(this.state.id);  //changed thif from props.member.id
     this.setState({status : ''});
   },
@@ -55,7 +53,6 @@ var EventRow = React.createClass({
      });
   },
   handleSave : function(e) {
-    console.log("handleSave:  " + this.state.id)
       e.preventDefault();
       var eventDate = this.state.eventDate.trim();
       var eventName = this.state.eventName.trim();
@@ -72,7 +69,6 @@ var EventRow = React.createClass({
 //        console.log("returning")
 //        return;
 //      }
-      console.log("in the updatehandler")
       this.props.updateHandler(
         this.state.id,eventDate,eventName,eventType,distance,raceSeries,ageGroup,county,eventUrl,membersCompeting,membersCompetingCount);
       this.setState({status : ''} )
@@ -127,6 +123,13 @@ var EventRow = React.createClass({
       membersCompetingCount: e.target.value
     })
   },
+  handleEnterEvent: function(e){
+    //console.log("Enter Event " + this.state.id + ' : ' + this.state.eventName)
+    // pass up the event id and let API add the user name to membersCompeting and increment the membersCompetingCount
+    this.props.addMemberToEventParticipants(this.state.id);
+    this.setState({status : ''});
+  },
+
   render: function(){
     var activeButtons = buttons.normal;
     var leftButtonHandler = this.handleEdit;
@@ -196,22 +199,34 @@ var EventRow = React.createClass({
       leftButtonHandler = this.handleUndo;
       rightButtonHandler = this.handleConfirm;
     }
+
     return(
       <tr>
         {fields}
+        { this.props.isAdministrator ?
+            <td>
+              <input type="button" className={'btn ' + activeButtons.leftButtonColor}
+                        value={activeButtons.leftButtonVal}
+                        onClick={leftButtonHandler} />
+            </td>
+          : null
+        }
+        { this.props.isAdministrator ?
+            <td>
+              <input type="button" className={'btn ' + activeButtons.rightButtonColor}
+                      value={activeButtons.rightButtonVal}
+                      onClick={rightButtonHandler} />
 
-        <td>
-          <input type="button" className={'btn ' + activeButtons.leftButtonColor}
-                    value={activeButtons.leftButtonVal}
-                    onClick={leftButtonHandler} />
-        </td>
-        <td>
-          <input type="button" className={'btn ' + activeButtons.rightButtonColor}
-                  value={activeButtons.rightButtonVal}
-                  onClick={rightButtonHandler} />
+            </td>
+          : null
+        }
+        { !this.props.isAdministrator ?
+            <td>
+              <button type="button" className="btn btn-success" id={this.state.id} onClick={this.handleEnterEvent}>Enter Event</button>
 
-        </td>
-
+            </td>
+          : null
+        }
       </tr>
     );
   }
@@ -225,16 +240,17 @@ var EventsList = React.createClass({
     }
   },
   render: function(){
-    console.log('EventsList');
-    console.log(this.props.events);
+
     //var contactRows = null; //TODO  initailize to an array of contact elements
     var eventRows = this.props.events.map(event => {
         return <EventRow key={event.id} event={event}
+            isAdministrator={this.props.isAdministrator}
             updateHandler={this.props.updateHandler}
             deleteHandler={this.props.deleteHandler}
+            addMemberToEventParticipants={this.props.addMemberToEventParticipants}
         />
     });
-    //console.log(this.contactRows);
+
     return (
       <tbody>
       {eventRows}
@@ -246,8 +262,7 @@ var EventsList = React.createClass({
 var EventsTable = React.createClass({
 
   render: function(){
-    console.log("events table");
-    console.log(this.props.allevents);
+
     return(
       <table className="table table-striped table-hover table-condensed">
         <thead>
@@ -266,10 +281,13 @@ var EventsTable = React.createClass({
             <th></th>
           </tr>
         </thead>
-        <EventsList events={this.props.allEvents}
+        <EventsList
+            events={this.props.allEvents}
+            isAdministrator={this.props.isAdministrator}
             addHandler={this.props.addHandler}
             updateHandler={this.props.updateHandler}
             deleteHandler={this.props.deleteHandler}
+            addMemberToEventParticipants={this.props.addMemberToEventParticipants}
         />
       </table>
     );
@@ -295,8 +313,8 @@ var Events = React.createClass({
       this.setState({}) ;
     }) ;
   }, //componentDidMount
+
   deleteEvent : function(k) {
-    console.log("deleting event id: " + k);
     api.deleteEvent(k)
       .then(response => {
         return api.getAllEvents()
@@ -307,8 +325,8 @@ var Events = React.createClass({
         this.setState({});
       });
   }, //deleteEvent
+
   addEvent : function(eDate,eName,eType,distance,series,ageGroup,county,eventUrl){
-    console.log("adding new event : " + eName + ' ' + eType);
     api.addEvent(eDate,eName,eType,distance,series,ageGroup,county,eventUrl);
     var p = api.getAllEvents();
     p.then( response => {
@@ -317,13 +335,13 @@ var Events = React.createClass({
       this.setState({}) ;
     }) ;
     this.setState({
-      addMemberBodyVisible: false,
+      addEventBodyVisible: false,
     });
   }, //addEvent
 
   updateEvent : function(key,eDate,eName,eType,distance,series,ageGroup,county,
        eventUrl,membersCompeting,membersCompetingCount) {
-    console.log("updateEvent" + key + eName);
+
     api.updateEvent(key,eDate,eName,eType,distance,series,ageGroup,county,
          eventUrl,membersCompeting,membersCompetingCount)
       .then ( response => {
@@ -336,6 +354,20 @@ var Events = React.createClass({
       })
       .catch( error => {console.log(`Update failed for ${error}` )}  ) ;
   }, // updateEvent
+
+  addMemberToEventParticipants : function(key){
+    var userName = "bob burger";
+    api.addMemberToEventParticipants(key,userName)
+      .then ( response => {
+         return api.getAllEvents()
+      })
+      .then( response => {
+          localStorage.clear();
+          localStorage.setItem('events', JSON.stringify(response)) ;
+          this.setState( {}) ;
+      })
+      .catch( error => {console.log(`Update failed for ${error}` )}  ) ;
+  }, // addMemberToEventParticipants
 
   toggleAddEventDisplay: function() {
     var tempVisibility = !this.state.addEventBodyVisible;
@@ -359,7 +391,6 @@ var Events = React.createClass({
   },
 
   render: function(){
-    console.log("Events Component");
 
     var events = localStorage.getItem('events') ?
       JSON.parse(localStorage.getItem('events')) : [];
@@ -374,12 +405,15 @@ var Events = React.createClass({
 
     return(
       <div className="interface">
-        <p1>Events</p1>
-{/*        <AddEvent addHandler={this.addEvent}
-            bodyVisible={this.state.addEventBodyVisible}
-            handleToggleAddEvent={this.toggleAddEventDisplay}
-        />
-*/}
+        <h1>Events</h1>
+
+        { this.props.isAdministrator ?
+            <AddEvent addHandler={this.addEvent}
+                bodyVisible={this.state.addEventBodyVisible}
+                handleToggleAddEvent={this.toggleAddEventDisplay}
+            />
+          : null
+        }
         <SearchEvents
           orderBy={this.state.orderBy}
           orderDir={this.state.orderDir}
@@ -387,10 +421,13 @@ var Events = React.createClass({
           onSearch={this.searchEvents}
         />
 
-        <EventsTable allEvents={filteredEvents}
+        <EventsTable
+            allEvents={filteredEvents}
+            isAdministrator={this.props.isAdministrator}
             addHandler={this.addEvent}
             updateHandler={this.updateEvent}
             deleteHandler={this.deleteEvent}
+            addMemberToEventParticipants={this.addMemberToEventParticipants}
         />
 
 

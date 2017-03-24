@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import uuid from 'uuid';
 
+
 var members =  [
   {
     "id": uuid.v4(),
@@ -40,61 +41,68 @@ var members =  [
   }
 ];
 
-var events =  [
-  {
-    "id": uuid.v4(),
-    "eventDate": "2017-04-15",
-    "eventName": "Nenagh Sprint (poolswim)",
-    "eventType": "Triathlon",
-    "distance": ["Sprint"],
-    "raceSeries": "Nationl Series",
-    "ageGroup": ["adults","children"],
-    "county": "Tipperary",
-    "eventurl": "www.nenaghtriathlon.com",
-    "membersCompeting": ["jim mason","fred flinstone"],
-    "membersCompetingCount": 2
-  },
-  {
-    "id": uuid.v4(),
-    "eventDate": "2017-04-19",
-    "eventName": "Portlaoise Sprint (poolswim)",
-    "eventType": "Swim",
-    "distance": ["Sprint","Try-a-Try"],
-    "raceSeries": "",
-    "ageGroup": ["adults"],
-    "county": "Laois",
-    "eventUrl": "www.laoistriathlon.com",
-    "membersCompeting": [],
-    "membersCompetingCount": 0
-  },
-  {
-    "id": uuid.v4(),
-    "eventDate": "2017-08-29",
-    "eventName": "Trip to Tipp",
-    "eventType": "Charity Cycle",
-    "distance": ["Sprint","Try-a-Try"],
-    "raceSeries": "",
-    "ageGroup": ["adults"],
-    "county": "Tipperary`",
-    "eventUrl": "www.laoistriathlon.com",
-    "membersCompeting": [],
-    "membersCompetingCount": 0
-  },
-  {
-    "id": uuid.v4(),
-    "eventDate": "2017-06-12",
-    "eventName": "Athy",
-    "eventType": "Triathlon",
-    "distance": ["Sprint","Try-a-Try"],
-    "raceSeries": "",
-    "ageGroup": ["adults"],
-    "county": "Laois",
-    "eventUrl": "www.laoistriathlon.com",
-    "membersCompeting": [],
-    "membersCompetingCount": 0
-  }
-];
-
+var events = null;
+if (localStorage.getItem('events')) {
+  events = JSON.parse(localStorage.getItem('events'));
+  localStorage.setItem('updated',false);
+} else {
+  events =  [
+    {
+      "id": uuid.v4(),
+      "eventDate": "2017-04-15",
+      "eventName": "Nenagh Sprint (poolswim)",
+      "eventType": "Triathlon",
+      "distance": ["Sprint"],
+      "raceSeries": "Nationl Series",
+      "ageGroup": ["adults","children"],
+      "county": "Tipperary",
+      "eventurl": "www.nenaghtriathlon.com",
+      "membersCompeting": ["jim mason","fred flinstone"],
+      "membersCompetingCount": 2
+    },
+    {
+      "id": uuid.v4(),
+      "eventDate": "2017-04-19",
+      "eventName": "Portlaoise Sprint (poolswim)",
+      "eventType": "Swim",
+      "distance": ["Sprint","Try-a-Try"],
+      "raceSeries": "",
+      "ageGroup": ["adults"],
+      "county": "Laois",
+      "eventUrl": "www.laoistriathlon.com",
+      "membersCompeting": [],
+      "membersCompetingCount": 0
+    },
+    {
+      "id": uuid.v4(),
+      "eventDate": "2017-08-29",
+      "eventName": "Trip to Tipp",
+      "eventType": "Charity Cycle",
+      "distance": ["Sprint","Try-a-Try"],
+      "raceSeries": "",
+      "ageGroup": ["adults"],
+      "county": "Tipperary`",
+      "eventUrl": "www.laoistriathlon.com",
+      "membersCompeting": [],
+      "membersCompetingCount": 0
+    },
+    {
+      "id": uuid.v4(),
+      "eventDate": "2017-06-12",
+      "eventName": "Athy",
+      "eventType": "Triathlon",
+      "distance": ["Sprint","Try-a-Try"],
+      "raceSeries": "",
+      "ageGroup": ["adults"],
+      "county": "Laois",
+      "eventUrl": "www.laoistriathlon.com",
+      "membersCompeting": [],
+      "membersCompetingCount": 0
+    }
+  ];
+  localStorage.setItem('events',JSON.stringify(events));
+  localStorage.setItem('updated',false);
+}
     var stubAPI = {
          deleteMember : function(k) {
             var promise = new Promise( (resolve,reject) => {
@@ -230,9 +238,20 @@ var events =  [
             },10) ;
          });
          return promise ;
-       }  // update
+       } , // updateEvent
+
+       addMemberToEventParticipants : function(key) {
+         var index = _.findIndex(events,
+         	  function(event) {
+                return event.id === key;
+              } );
+         if (index !== -1) {
+              events[index].membersCompetingCount += 1 ;
+              localStorage.setItem('updated', true ) ;
+              return true ;
+            }
+          return false ;
+       }
     }
-
-
 
 export default stubAPI ;

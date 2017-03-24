@@ -38,7 +38,7 @@ export default class NavBAr extends React.Component {
         <div id="navbarCollapse" className="collapse navbar-collapse">
             <ul className="nav navbar-nav">
                 <li className="active"><Link to="/"><span className="glyphicon glyphicon-home"></span> Home</Link></li>
-                <li><Link to="user">Users</Link></li>
+                <li><Link to="events">Events</Link></li>
                 <li><Link to="about">Contact Us</Link></li>
                 <li><Link to="admin">Admin</Link></li>
 

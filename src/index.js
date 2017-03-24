@@ -8,7 +8,7 @@ import 'expose?$!expose?jQuery!jquery'
 import Members from './Members';
 //import Events from './Events';
 import Layout from './pages/Layout';
-import User from './pages/User';
+import EventInfo from './pages/EventInfo';
 import About from './pages/About';
 import Info from './pages/Info';
 import Register from './pages/Register';
@@ -17,7 +17,7 @@ ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={Layout}>
       <IndexRoute component={Info} />
-      <Route path="user" component={User} />
+      <Route path="events" component={EventInfo} />
       <Route path="about" component={About} />
       <Route path="admin" component={Members} />
       <Route path="register" component={Register} />
