@@ -16,24 +16,24 @@ var Carousel = React.createClass ({
          {/* Carousel items */}
          <div className="carousel-inner">
            <div className="item active">
-             <img src="../../../images/sliderSwim.jpg" alt="First Slide" />
+             <img src="../../../images/sliderSwim.jpg" alt="Swim" />
              <div className="carousel-caption">
-               <h3>First slide label</h3>
-               <p>Lorem ipsum dolor sit amet...</p>
+               <h3>Swim</h3>
+               <p>Weekly group pool and open water swim coaching</p>
              </div>
            </div>
            <div className="item">
-             <img src="../../../images/sliderBike.jpg" alt="Second Slide" />
+             <img src="../../../images/sliderBike.jpg" alt="Bike" />
              <div className="carousel-caption">
-               <h3>Second slide label</h3>
-               <p>Aliquam sit amet gravida nibh, facilisis...</p>
+               <h3>Bike</h3>
+               <p>Group spins - time trials</p>
              </div>
            </div>
            <div className="item">
-             <img src="../../../images/sliderRun.jpg" alt="Third Slide" />
+             <img src="../../../images/sliderRun.jpg" alt="Run" />
              <div className="carousel-caption">
-               <h3>Third slide label</h3>
-               <p>Praesent commodo cursus magna vel...</p>
+               <h3>Run</h3>
+               <p>Enjoy relaxed group runs as well as race training</p>
              </div>
            </div>
          </div>

@@ -1,0 +1,47 @@
+[33mcommit 3a70320cdc847c1736dcc422601d75260f660bd0[m
+Author: jimjimmason <jmason@eircom.net>
+Date:   Thu Mar 23 22:17:02 2017 +0000
+
+    Carousel finally working
+
+[33mcommit 4ecdae54276d836ba86a099430640c117426dadc[m
+Author: jimjimmason <jmason@eircom.net>
+Date:   Tue Mar 21 22:30:39 2017 +0000
+
+    Using new navbar
+
+[33mcommit 65c7a5ac8b2c92bbf7883ca11fcb3e78afec0432[m
+Author: jimjimmason <jmason@eircom.net>
+Date:   Tue Mar 21 22:03:24 2017 +0000
+
+    Basic routing added - site layout oadded - bootstrap carousel and nav not working
+
+[33mcommit 0359b65daf276f696291865e0be43fed01339cd4[m
+Author: jimjimmason <jmason@eircom.net>
+Date:   Tue Mar 21 18:19:51 2017 +0000
+
+    Events -partially working added
+
+[33mcommit 0356f6af249680779c91fd38b4474a46c2dcbef8[m
+Author: jimjimmason <jmason@eircom.net>
+Date:   Sat Mar 18 14:24:31 2017 +0000
+
+    Members update working
+
+[33mcommit 60284ca32980424146507edbc22701e2a5a76dfa[m
+Author: jimjimmason <jmason@eircom.net>
+Date:   Sat Mar 18 12:07:23 2017 +0000
+
+    AddMember using state instead of refs - udated api method names to allow for new data types
+
+[33mcommit 667f45bcf2c0493576cf9d414a7f18ddad70103d[m
+Author: jimjimmason <jmason@eircom.net>
+Date:   Thu Mar 16 14:59:50 2017 +0000
+
+    AddMember form added -toggle visibility working
+
+[33mcommit 1ab99c2c7359e01e5be4c83e442f3ddf3a30469f[m
+Author: jimjimmason <jmason@eircom.net>
+Date:   Thu Mar 16 13:08:06 2017 +0000
+
+    Members - stubAPI and Delete function working

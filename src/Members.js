@@ -165,8 +165,6 @@ var MemberRow = React.createClass({
     var leftButtonHandler = this.handleEdit;
     var rightButtonHandler = this.handleDelete;
 
-    //console.log("displayMember");
-    //console.log(this.props.member.id);
     var fields = [
       <td key={'fname'} >{this.state.fname}</td>,
       <td key={'lname'}>{this.state.lname}</td>,
@@ -279,10 +277,9 @@ var MemberRow = React.createClass({
                     onClick={leftButtonHandler} />
         </td>
         <td>
-          <input type="button" className={'btn ' + activeButtons.rightButtonColor}
+        <input type="button" className={'btn ' + activeButtons.rightButtonColor}
                   value={activeButtons.rightButtonVal}
                   onClick={rightButtonHandler} />
-
         </td>
 
       </tr>

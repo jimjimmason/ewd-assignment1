@@ -2,6 +2,9 @@ import React from 'react';
 import './App.css'
 import buttons from './config/MembersButtons';
 import api from './stubAPI';
+import SearchEvents from './SearchEvents';
+import _ from 'lodash';
+
 //import AddMember from './AddMember';
 
 var EventRow = React.createClass({
@@ -278,7 +281,10 @@ var EventsTable = React.createClass({
 var Events = React.createClass({
   getInitialState : function() {
     return {
-      addEventBodyVisible: false
+      addEventBodyVisible: false,
+      orderBy: 'eventDate',
+      orderDir: 'asc',
+      queryText: '',
     };
   },
   componentDidMount : function() {
@@ -337,16 +343,35 @@ var Events = React.createClass({
       addEventBodyVisible: tempVisibility
     });
   }, //toggleAddEventDisplay
+
+  reOrder: function(orderBy, orderDir) {
+    this.setState({
+      orderBy: orderBy,
+      orderDir: orderDir,
+      queryText: ''
+    });
+  },
+
+  searchEvents(q) {
+    this.setState({
+      queryText: q
+    });
+  },
+
   render: function(){
-    //console.log("Events Component");
-    if ( localStorage.getItem('events') ){
-      console.log("envents found")
-      var test = JSON.parse(localStorage.getItem('events'));
-      console.log(test)
-      console.log ("test: " + test[0].eventName)
-    }
+    console.log("Events Component");
+
     var events = localStorage.getItem('events') ?
       JSON.parse(localStorage.getItem('events')) : [];
+
+      // Filter the events list by search text
+      var filteredEvents = events.filter(function(e) {
+        return e.eventName.toLowerCase().search(
+          this.state.queryText.toLowerCase() ) != -1;
+        }.bind(this) );
+        //sort the filtered list by specified order
+        filteredEvents = _.sortBy(filteredEvents, this.state.orderBy);
+
     return(
       <div className="interface">
         <p1>Events</p1>
@@ -355,7 +380,14 @@ var Events = React.createClass({
             handleToggleAddEvent={this.toggleAddEventDisplay}
         />
 */}
-        <EventsTable allEvents={events}
+        <SearchEvents
+          orderBy = {this.state.orderBy}
+          orderDir = {this.state.orderDir}
+          onReOrder = {this.reOrder}
+          onSearch = {this.searchEvents}
+        />
+
+        <EventsTable allEvents={filteredEvents}
             addHandler={this.addEvent}
             updateHandler={this.updateEvent}
             deleteHandler={this.deleteEvent}

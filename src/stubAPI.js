@@ -17,7 +17,8 @@ var members =  [
     "gender" : "male",
     "imageUrl": "",
     "Type": "Administrator",
-    "TriathlonIrelandID": "1965IE12431244"
+    "TriathlonIrelandID": "1965IE12431244",
+    "Role": "admin"
   },
   {
     "id": uuid.v4(),
@@ -34,7 +35,8 @@ var members =  [
     "gender": "male",
     "imageUrl":"",
     "Type": "race",
-    "TriathlonIrelandID": ""
+    "TriathlonIrelandID": "",
+    "Role": "member"
   }
 ];
 
@@ -56,6 +58,32 @@ var events =  [
     "id": uuid.v4(),
     "eventDate": "2017-04-19",
     "eventName": "Portlaoise Sprint (poolswim)",
+    "eventType": "Swim",
+    "distance": ["Sprint","Try-a-Try"],
+    "raceSeries": "",
+    "ageGroup": ["adults"],
+    "county": "Laois",
+    "eventUrl": "www.laoistriathlon.com",
+    "membersCompeting": [],
+    "membersCompetingCount": 0
+  },
+  {
+    "id": uuid.v4(),
+    "eventDate": "2017-08-29",
+    "eventName": "Trip to Tipp",
+    "eventType": "Charity Cycle",
+    "distance": ["Sprint","Try-a-Try"],
+    "raceSeries": "",
+    "ageGroup": ["adults"],
+    "county": "Tipperary`",
+    "eventUrl": "www.laoistriathlon.com",
+    "membersCompeting": [],
+    "membersCompetingCount": 0
+  },
+  {
+    "id": uuid.v4(),
+    "eventDate": "2017-06-12",
+    "eventName": "Athy",
     "eventType": "Triathlon",
     "distance": ["Sprint","Try-a-Try"],
     "raceSeries": "",

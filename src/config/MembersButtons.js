@@ -1,4 +1,4 @@
-var membersButtons = {
+var Buttons = {
        normal : {
            leftButtonVal : 'Edit',
            rightButtonVal : 'Delete',
@@ -19,4 +19,4 @@ var membersButtons = {
        }
     }
 
-export default membersButtons;
+export default Buttons;
