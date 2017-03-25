@@ -5,7 +5,7 @@ import '../App.css';
 var Carousel = React.createClass ({
   render() {
     return (
-<div class="bs-example">
+
       <div id="myCarousel" className="carousel slide" data-interval={3000} data-ride="carousel">
          {/* Carousel indicators */}
          <ol className="carousel-indicators">
@@ -45,7 +45,7 @@ var Carousel = React.createClass ({
            <span className="glyphicon glyphicon-chevron-right" />
          </a>
        </div>
-</div>
+
     );
   }
 });

@@ -17,3 +17,4 @@ var Register = React.createClass({
 });
 
 export default Register;
+ReviewsPage.
