@@ -80,22 +80,20 @@ Sample Members data
         upvotes : 10
       }
       
-![][image1]
-
 
 
 
 ## App Component Design.
 
 A diagram showing the app's hierarchical component design (see example below). 
+![componentlayout](https://cloud.githubusercontent.com/assets/25729854/24335676/3cfd32f0-127a-11e7-8e54-0dfddd7f3f25.PNG)
 
-![][image1]
 
 ## UI Design.
 
 . . . . . Screenshots of app's views (see example below) with appropriate captions (user regeneration and login views, if implemented, can be omitted) . . . . . . . 
 
-![][image2]
+![rootpage][./rootpage.png]
 This is the entry page to the app. I consists of Layout, NavBar, Footer, Carousel and Info#
 
 ![][image2]
