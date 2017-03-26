@@ -89,13 +89,14 @@ Sample Members data
 
 A diagram showing the app's hierarchical component design (see example below). 
 
-![][image2]
+![][ComponentLayout]
 
 ## UI Design.
 
 . . . . . Screenshots of app's views (see example below) with appropriate captions (user regeneration and login views, if implemented, can be omitted) . . . . . . . 
 
-![][image3]
+![][RootPage]
+This is the entry page to the app. I consists of Layout, NavBar, Footer, Carousel and Info
 
 ## Routing.
 . . . . List each route supported and state the associated view . . . . . 
