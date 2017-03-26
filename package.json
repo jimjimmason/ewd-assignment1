@@ -12,6 +12,7 @@
     "lodash": "^2.4.2",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
+    "react-form-validate": "^1.0.3",
     "react-router": "^2.6.1",
     "superagent": "^1.6.1",
     "uuid": "^3.0.1"
