@@ -4,7 +4,7 @@ import { Link } from "react-router";
 export default class NavBAr extends React.Component {
 
   render() {
-    var isAdministrator = false;
+    //var isAdministrator = false;
     return (
       <div className="container">
         <nav role="navigation" className="navbar navbar-inverse">
@@ -25,10 +25,13 @@ export default class NavBAr extends React.Component {
                 <li><Link to="events">Events</Link></li>
                 <li><Link to="reviews">Reviews</Link></li>
                 <li><Link to="about">Contact Us</Link></li>
-                { isAdministrator ?
+                {/*  in prepartion for Role based authentication  
+                  { isAdministrator ?
+                    <li><Link to="admin">Admin</Link></li>
+                    : null
+                  }
+                */}
                 <li><Link to="admin">Admin</Link></li>
-                : null
-              }
             </ul>
             <form role="search" class="navbar-form navbar-left">
               <ul className="nav navbar-nav navbar-right">

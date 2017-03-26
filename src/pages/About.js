@@ -12,10 +12,12 @@ Triathlon has become very popular in recent years and continues to grow. The clu
 
 Club Members regularly participate in events, such as Duathlons, Triathlons, 5 K & 10 K Running events, to Half & Full Marathons, and throw in a little Adventure Racing events to make it interesting.
 
-- See more at: http://www.thurlestriathlonclub.com
+- See more at: <a className="btn btn-default" href="http://www.thurlestriathlonclub.com" role="button">Thurles Triathlon</a>
+
 </p>
 <p>
-Thurles Triathlon Club may be contacted through FaceBook ‘Thurles Triathlon Club / Team’ or via our email – athytriclub@gmail.com - See more at: http://www.athytriathlonclub.com/contact-us
+Thurles Triathlon Club may be contacted through FaceBook ‘Thurles Triathlon Club / Team’ or via our email – <a className="btn btn-default" href="jmason@eircom.net" role="button">Email</a>
+ - See more at: <a className="btn btn-default" href="http://www.thurlestriathlonclub.com" role="button">contact us</a>
 
       </p>
       </div>

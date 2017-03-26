@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import 'expose?$!expose?jQuery!jquery'
 
-import Members from './Members';
+import Admin from './pages/Admin';
 import Layout from './pages/Layout';
 import EventInfo from './pages/EventInfo';
 import About from './pages/About';
@@ -13,15 +13,13 @@ import Register from './pages/Register';
 import ReviewsPage from './pages/ReviewsPage';
 import ReviewComments from './ReviewComments';
 
-var isAdministrator = false;
-
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={Layout}>
       <IndexRoute component={Info} />
-      <Route path="events" component={EventInfo} params={key: isAdministrator} />
+      <Route path="events" component={EventInfo} />
       <Route path="about" component={About} />
-      <Route path="admin" component={Members} />
+      <Route path="admin" component={Admin} />
       <Route path="register" component={Register} />
       <Route path="reviews" component={ReviewsPage} />
       <Route path="reviews/:postId" component={ReviewComments} />
