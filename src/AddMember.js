@@ -213,7 +213,7 @@ var AddMember=React.createClass({
 
            </div>
 
-            <button className="btn btn-default" onClick={this.handleAdd}>Add Member</button>
+            <button className="btn btn-default" onClick={this.handleAdd}>{this.props.registerUser ? "Register Details": "Add Member"}</button>
           </form>
         </div>
       </div>

@@ -4,7 +4,7 @@ var About = React.createClass({
   render: function(){
     return (
       <div>
-      <h3> About page stub </h3>
+      <h1> About Thurles Triathlon Club </h1>
       <p>
       	Thurles Triathlon Club is based in Mid Tipperary, Ireland. The Club was created in 2015, by a small number of individuals who shared the  common interest in the different disciplines encompassing the sport that is Triathlon. The primary goal is to invite & welcome in new members, of all abilities, and help and support them to reach whatever goal they aim for, whether that be improved health, increased fitness, or to actively compete in Triathlon, Duathlon events.
 

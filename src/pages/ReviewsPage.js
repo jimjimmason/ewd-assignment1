@@ -9,7 +9,8 @@ var ReviewsPage = React.createClass({
 
     return (
       <div>
-      <h3> Reviews Page </h3>
+      <h1>Reviews Page</h1>
+      <p>Add reviews on equipent, events, training etc here.</p>
       <Reviews />
       </div>
     );

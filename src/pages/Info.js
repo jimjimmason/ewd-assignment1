@@ -9,7 +9,7 @@ var Info = React.createClass({
         <div className="container">
           <Carousel />
         </div>
-        <h2>Thules Triathlon Club</h2>
+         <h1 className="text-center">Thurles Triathlon Club</h1>
         <div className="container" >
           <div className="row">
             <div className="col-sm-4">

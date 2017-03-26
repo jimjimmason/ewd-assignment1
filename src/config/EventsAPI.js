@@ -108,7 +108,7 @@ var EventsAPI = {
                    return event.id === key;
                } );
               if (index !== -1) {
-                  members.splice(index, 1, {
+                  events.splice(index, 1, {
                     eventDate: eDate,
                     eventName: eName,
                     eventType : eType,
