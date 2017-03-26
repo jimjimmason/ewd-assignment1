@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css'
 import buttons from './config/MembersButtons';
-import api from './stubAPI';
+import api from './config/EventsAPI';
 import AddEvent from './AddEvent';
 import SearchEvents from './SearchEvents';
 import _ from 'lodash';
