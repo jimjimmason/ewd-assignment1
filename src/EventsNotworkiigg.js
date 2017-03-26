@@ -135,6 +135,11 @@ var EventRow = React.createClass({
     var leftButtonHandler = this.handleEdit;
     var rightButtonHandler = this.handleDelete;
 
+    var members = this.state.membersCompeting;
+    var memberList = members.map((name) =>
+      <li>{name}</li>
+    );
+    console.log("evets partic: " + memberList);
     var fields = [
       <td key={'eventDate'} >{this.state.eventDate}</td>,
       <td key={'eventName'}>{this.state.eventName}</td>,
@@ -144,7 +149,7 @@ var EventRow = React.createClass({
       <td key={'ageGroup`'}>{this.state.ageGroup}</td>,
       <td key={'county'}>{this.state.county}</td>,
       <td key={'eventUrl'}>{this.state.eventUrl}</td>,
-      <td key={'membersCompeting'}>{this.state.membersCompeting}</td>,
+      <td key={'membersCompeting'}><ul>{memberList}</ul></td>,
       <td key={'membersCompetingCount'}>{this.state.membersCompetingCount}</td>
     ];
     if (this.state.status === 'edit') {
@@ -184,10 +189,12 @@ var EventRow = React.createClass({
             value={this.state.eventUrl}
             onChange={this.handleEventUrlChange} />
         </td>,
+
         <td key={'membersCompeting'}><input type="text" className="form-control"
             value={this.state.membersCompeting}
             onChange={this.handleMembersCompetingChange} />
         </td>,
+
         <td key={'membersCompetingCount'}><input type="text" className="form-control"
             value={this.state.membersCompetingCount}
             onChange={this.handleMembersCompetingCountChange} />
@@ -305,7 +312,7 @@ var Events = React.createClass({
       queryText: '',
     };
   },
-  componentDidMount : function() {
+/*  componentDidMount : function() {
     var p = api.getAllEvents();
     p.then( response => {
       localStorage.clear();
@@ -313,7 +320,11 @@ var Events = React.createClass({
       this.setState({}) ;
     }) ;
   }, //componentDidMount
+*/
 
+componentWillUnmount: function() {
+    api.persist() ;
+  },
   deleteEvent : function(k) {
     api.deleteEvent(k)
       .then(response => {
@@ -356,17 +367,10 @@ var Events = React.createClass({
   }, // updateEvent
 
   addMemberToEventParticipants : function(key){
-    var userName = "bob burger";
-    api.addMemberToEventParticipants(key,userName)
-      .then ( response => {
-         return api.getAllEvents()
-      })
-      .then( response => {
-          localStorage.clear();
-          localStorage.setItem('events', JSON.stringify(response)) ;
-          this.setState( {}) ;
-      })
-      .catch( error => {console.log(`Update failed for ${error}` )}  ) ;
+    var memberName = "bob burger";
+     console.log("Events: " + key + '  ' + memberName);
+    api.addMemberToEventParticipants(key,memberName)
+    this.setstate({});
   }, // addMemberToEventParticipants
 
   toggleAddEventDisplay: function() {
@@ -405,6 +409,8 @@ var Events = React.createClass({
 
     return(
       <div className="interface">
+        <h1>Events</h1>
+
         { this.props.isAdministrator ?
             <AddEvent addHandler={this.addEvent}
                 bodyVisible={this.state.addEventBodyVisible}

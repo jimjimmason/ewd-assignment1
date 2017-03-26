@@ -1,5 +1,5 @@
 import React from 'react';
-//import MemberType from './MemberType';
+//import ValidateableForm from 'react-form-validate';
 
 var AddMember=React.createClass({
   getInitialState : function() {
@@ -153,13 +153,24 @@ var AddMember=React.createClass({
           <span className="glyphicon glyphicon-plus"></span> {this.props.registerUser ? "Register Details": "Add Member"}
         </div>
         <div className="panel-body" style={displayAddMemberBody}>
+        
+          {/*  This did not work - I suspect it reqiure just a simple from no embedded vars etc.
+          <ValidateableForm  
+            onSubmit={this.console}
+            rules={{
+              fname: {
+                required:true
+              }
+
+            }}>
+          */}
           <form role="form">
 
             <div className="form-group">
 
 
               <label >First Name</label>
-              <input type="text" className="form-control" id="fname" placeholder="First Name" value={this.state.fname} onChange={this.handleFnameChange}/>
+              <input type="text" className="form-control" name="fname" id="fname" placeholder="First Name" value={this.state.fname} onChange={this.handleFnameChange}/>
               <label >Last Name</label>
               <input type="text" className="form-control" id="lname" placeholder="Last Name" value={this.state.lname} onChange={this.handleLnameChange}/>
               <label >Address 1</label>
@@ -213,8 +224,9 @@ var AddMember=React.createClass({
 
            </div>
 
-            <button className="btn btn-default" onClick={this.handleAdd}>Add Member</button>
+            <button type="submit" className="btn btn-default" onClick={this.handleAdd}>{this.props.registerUser ? "Register Details": "Add Member"}</button>
           </form>
+          {/* </ValidateableForm> */}
         </div>
       </div>
     );

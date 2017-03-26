@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css'
 import buttons from './config/MembersButtons';
-import api from './stubAPI';
+import api from './config/MembersAPI';
 import AddMember from './AddMember';
 import SearchMembers from './SearchMembers';
 import _ from 'lodash';
