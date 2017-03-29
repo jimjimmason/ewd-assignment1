@@ -6,7 +6,7 @@ var ReviewsPage = React.createClass({
   render: function(){
     //var bVisible = true;
     //var bRegisterUser = true;
-
+console.log("ReviewsPage LSKDFLKJ")
     return (
       <div>
       <h1>Reviews Page</h1>
@@ -16,3 +16,5 @@ var ReviewsPage = React.createClass({
     );
   }
 });
+
+export default ReviewsPage;

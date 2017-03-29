@@ -1,32 +1,66 @@
 import React from 'react';
 import Members from '../Members';
-//import Events from '../Events';
+import Events from '../Events';
 
 
 var Admin = React.createClass({
   getInitialState : function() {
     return {
-      isAdministrator: true
+      isAdministrator: true,
+      membersClassName: 'active',
+      eventsClassName: null,
+      otherClassName: null,
+      showMembers: false,
+      showEvents: true,
+      showOther: false
     };
   },
   handleMemberClick: function(){
-    var memberView = true;
-    console.log("memberView clicked")
+    this.setState({
+      showMembers: true,
+      showEvents: false,
+      showOther: false,
+      membersClassName: 'active',
+      eventsClassName: null,
+      otherClassName:null
+    })
+    //console.log("memberView clicked")
   },
   handleEventClick: function(){
-    var eventsView = true;
-    console.log("eventsView clicked")
+    this.setState({
+      showMembers: false,
+      showEvents: true,
+      showOther: false,
+      membersClassName: null,
+      eventsClassName: 'active',
+      otherClassName:null
+    })
+    //console.log("eventsView clicked")
+  },
+   handleOtherClick: function(){
+    this.setState({
+      showMembers: false,
+      showEvents: false,
+      showOther: true,
+      membersClassName: null,
+      eventsClassName: null,
+      otherClassName:'active'
+    })
+    //console.log("eventsView clicked")
   },
   render: function(){
     return (
       <div>
         <h1> Admin Page </h1>
         <ul className="nav nav-tabs">
-            <li className="active"><a href="#" onClick={this.handleMemberClick}><span className="glyphicon glyphicon-user"></span>  Members</a></li>
-            <li><a href="#" onClick={this.handleEventClick}><span className="glyphicon glyphicon-flash"></span> Events</a></li>
-            <li><a href="#"><span className="glyphicon glyphicon-envelope"></span> Admin</a></li>
+            <li className={this.state.membersClassName}><a href="#" onClick={this.handleMemberClick}><span className="glyphicon glyphicon-user"></span>  Members</a></li>
+            <li className={this.state.eventsClassName}><a href="#" onClick={this.handleEventClick}><span className="glyphicon glyphicon-flash"></span> Events</a></li>
+            <li className={this.state.otherClassName}><a href="#" onClick={this.handleOtherClick}><span className="glyphicon glyphicon-envelope"></span> Admin</a></li>
         </ul>
-        <Members />
+        {this.state.showMembers ?  <Members isAdministrator={this.state.isAdministrator} /> : null }
+        {this.state.showEvents ?  <Events isAdministrator={this.state.isAdministrator} /> : null }
+        {this.state.showOther ?  <h2>Placeholder for more functionality</h2> : null }
+        
       </div>
     );
   }

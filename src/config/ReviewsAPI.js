@@ -114,3 +114,5 @@ if ( localStorage.getItem('posts') ) {
         }
       }
   }
+
+export default ReviewsAPI;
