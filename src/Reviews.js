@@ -79,8 +79,7 @@ var NewsItem = React.createClass({
     } else {
        line = <span>{this.props.post.title} </span> ;
     }
-    console.log("title: " + this.props.post.title)
-    console.log("reviw: " + this.props.post.review)
+
     return (
       <div >
         <span className="glyphicon glyphicon-thumbs-up" 

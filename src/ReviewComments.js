@@ -116,5 +116,3 @@ var ReviewComments = React.createClass({
       );
   }
 });
-
-export default ReviewComments;

@@ -16,5 +16,3 @@ var ReviewsPage = React.createClass({
     );
   }
 });
-
-export default ReviewsPage;
