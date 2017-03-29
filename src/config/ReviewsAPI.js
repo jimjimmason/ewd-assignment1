@@ -16,29 +16,29 @@ if ( localStorage.getItem('posts') ) {
       },
      { 
         id: 2,
-        title : 'The button that is not.',
+        title : 'Kuota Kyron',
         link : 'http://blog.nuclearsecrecy.com/2014/12/15/button-isnt/',
-        review: 'slkjglskjdfglksjflkasjflfkj',
-        username : 'notme',
-        comments : ['notme'],
+        review: 'The Kryon is a good bike and is well made with neat lines and internal cable routing',
+        username : 'Bob',
+        comments : ['Got mine in World Wide Cycles Clonme'],
         upvotes : 12
       },
       { 
         id: 3,
-        title : 'Google Nears $1B Investment in SpaceX',
+        title : 'For Sale: MAKO MENS NAMI TRIATHLON WETSUIT',
         link : null,
-        review: null,
+        review: '€95 (175 new) I year old. see review here http://www.irishfit.eu/shop/triathlon/mens-triathlon-wetsuits/mako-mens-nami-triathlon-wetsuit',
         username : 'notme',
         comments : [],
         upvotes : 12
       },
       { 
         id: 4,
-        title : 'Coinbase Raises $75M from DFJ Growth, USAA, and More',
-        link : 'http://blog.coinbase.com/post/108642362357/coinbase-raises-75m-from-dfj-growth-usaa-nyse',
-        review: 'slkjglskjdfglksjflkasjflfkj',
+        title : 'Swim, Bike, Run: Our Triathlon Story',
+        link : 'https://www.amazon.co.uk/Swim-Bike-Run-Triathlon-Story/dp/0241965845/ref=sr_1_1?ie=UTF8&qid=1490820635&sr=8-1&keywords=triathlon+books  ',
+        review: 'This is the story of how two skinny lads from west Yorkshire became the best triathletes in the world.',
         username : 'psmith',  
-        comments : ['Rubbish','total rubbish'],
+        comments : ['Great Rad','loved it'],
         upvotes : 2
       }
   ] ;

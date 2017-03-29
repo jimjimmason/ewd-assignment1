@@ -451,7 +451,6 @@ console.log ("members jim" + members)
 
     return(
       <div className="interface">
-        <p>Members</p>
         <AddMember addHandler={this.addMember}
             bodyVisible={this.state.addMemberBodyVisible}
             handleToggleAddMember={this.toggleAddMemberDisplay}

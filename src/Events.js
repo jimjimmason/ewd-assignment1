@@ -275,8 +275,8 @@ var EventsTable = React.createClass({
             <th>Age Group</th>
             <th>County</th>
             <th>Event URL</th>
-            <th>Members Competing</th>
-            <th>Num Members Competing</th>
+            <th>Members Taking Part</th>
+            <th># Members Taking Part</th>
             <th></th>
             <th></th>
           </tr>
