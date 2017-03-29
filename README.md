@@ -1,20 +1,5 @@
 # Assignment 1 - ReactJS app.
 
-<<<<<<< HEAD
-Name: ... your name ...
-
-## Overview.
-...... A statement of the app concept and objectives (about a half-page) ........
-
-
- . . . . . List of user features (excluding user registration and authentication) . . . . 
- 
- + Feature 1
- + Feature 2
- + Feature 3
- + etc
- + etc
-=======
 Name: James Mason
 
 ## Overview.
@@ -30,19 +15,13 @@ Members will be able to leave reviews about event, equipment etc., this is to en
  + Administrator can maintain the events calendar, adding, editing and deleting events as required.
  + Administrator can maintain user of the systems.
  + Administrator can maintain the reviews section.
->>>>>>> 84f5fc4601dfebbabfa0d8d6c5be260240ef833f
+
 
 ## Installation requirements.
 . . . .  List of software used to develop the app . . . . . . . 
 + ReactJS v15.3.0
 + Bootstrap 3
 + create-react-app tool
-<<<<<<< HEAD
-+ etc
-+ etc 
-
-. . . . . . Also, explain (to a third party) what steps one must take to run your app after cloning it from the repository, e.g. any non-standard software installation; any environment setup; how to start app; where to view app in browser . . . . . . . At its simplest this may just be: npm install + npm start
-=======
 + react-router
 + superagent
 + uuid
@@ -52,51 +31,8 @@ After cloning repository from github.com all that is reqiured to start project:
 + npm install 
 + npm start
 + Navigate to localhost://3000 in your browser
->>>>>>> 84f5fc4601dfebbabfa0d8d6c5be260240ef833f
-
-## Data Model Design.
-
-Diagram of app's data model (see example below) AND/OR a sample of the test data used (JSON or equivalent).
-
-<<<<<<< HEAD
-![][image1]
-
-Use meaningful sample data. Briefly explain any non-trivial issues.
-
-## App Component Design.
-
-A diagram showing the app's hierarchical component design (see example below). 
-
-![][image2]
-
-## UI Design.
-
-. . . . . Screenshots of app's views (see example below) with appropriate captions (user regeneration and login views, if implemented, can be omitted) . . . . . . . 
-
-![][image3]
-
-## Routing.
-. . . . List each route supported and state the associated view . . . . . 
-
-+ /foos - displays all published foos
-+ /foos/:id - detail view of a particular foo (:id)
-+ etc
-+ etc
-
-## Extra features
-
-. . . . . Briefly explain any non-standard features, functional or non-functional (e.g. user registration, authentication) developed for the app . . . . . .  
-
-## Independent learning.
-
-. . . . . State the non-standard aspects of Angular (or other related technologies) that you researched and applied in this assignment . . . . .  
 
 
-
-[image1]: ./model.png
-[image2]: ./design.jpg
-[image3]: ./screen.png
-=======
 Sample Members data
   {
     "id": uuid.v4(),
@@ -221,4 +157,3 @@ I did not get to implement all the functionality I would like to have done.
 Implementing Role base autherisation, persisting to a database and allowing more interaction between the components in the application will be the challenge for the second assignment.
 
 
->>>>>>> 84f5fc4601dfebbabfa0d8d6c5be260240ef833f
