@@ -1,6 +1,6 @@
 import React from 'react';
 import AddMember from '../AddMember';
-import api from '../config/MembersAPI';
+import api from '../../api/MembersAPI';
 
 var Register = React.createClass({
   addMember : function(fn,ln,addr1,addr2,town,county,nationality,phone,email,dob,gender,imageUrl,type,tino){

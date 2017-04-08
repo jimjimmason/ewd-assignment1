@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import api from './config/ReviewsAPI';
+import api from '../api/ReviewsAPI';
 //new import to support routing
 import { Link } from 'react-router';
 

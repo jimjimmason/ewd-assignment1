@@ -1,5 +1,5 @@
 import React from 'react';
-import Carousel from './Carousel';
+import Carousel from '../utils/Carousel';
 
 var Info = React.createClass({
   render: function(){

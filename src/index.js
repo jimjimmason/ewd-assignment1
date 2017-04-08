@@ -4,14 +4,14 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import 'expose?$!expose?jQuery!jquery'
 
-import Admin from './pages/Admin';
-import Layout from './pages/Layout';
-import EventInfo from './pages/EventInfo';
-import About from './pages/About';
-import Info from './pages/Info';
-import Register from './pages/Register';
-import ReviewsPage from './pages/ReviewsPage';
-import ReviewComments from './ReviewComments';
+import Admin from './app/views/Admin';
+import About from './app/views/About';
+import EventInfo from './app/views/EventInfo';
+import Info from './app/views/Info';
+import Layout from './app/views/Layout';
+import Register from './app/views/Register';
+import ReviewComments from './app/ReviewComments';
+import ReviewsPage from './app/views/ReviewsPage';
 
 ReactDOM.render((
   <Router history={browserHistory}>
@@ -22,7 +22,7 @@ ReactDOM.render((
       <Route path="admin" component={Admin} />
       <Route path="register" component={Register} />
       <Route path="reviews" component={ReviewsPage} />
-      <Route path="reviews/:postId" component={ReviewComments} />
+      <Route path="reviews/:postId" component={ReviewComments} /> 
     </Route>
   </Router>
 ),
